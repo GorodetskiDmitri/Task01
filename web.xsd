@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.epam.by/web" 
+		xmlns:tns="http://www.epam.by/web" 
+		elementFormDefault="qualified">
+
+	<element name="web-app" type="tns:WebAppType" />	
+		
+	<complexType name="WebAppType">
+	  	<choice minOccurs="0" maxOccurs="unbounded">
+                <element name="display-name" type="string"/>
+                <element name="welcome-file-list" type="tns:WelcomeFileListType"/>
+                <element name="filter" type="tns:FilterType"/>
+                <element name="filter-mapping" type="tns:FilterMappingType"/>
+                <element name="listener" type="tns:ListenerType"/>
+                <element name="servlet" type="tns:ServletType"/>
+                <element name="servlet-mapping" type="tns:ServletMappingType"/>
+                <element name="error-page" type="tns:ErrorPageType"/>
+        </choice>
+		
+		<attribute name="id" type="string" use="required" />
+		<attribute name="version" type="string" use="required" />
+	</complexType>
+	
+	<!-- Тип элемента welcome-file-list -->
+	<complexType name="WelcomeFileListType">
+		<sequence>
+			<element name="welcome-file" type="string" minOccurs="1" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента filter -->
+	<complexType name="FilterType">
+		<sequence>
+			<element name="filter-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="filter-class" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="init-param" type="tns:InitParamType" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента init-param -->
+	<complexType name="InitParamType">
+		<sequence>
+			<element name="param-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="param-value" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента filter-mapping -->
+	<complexType name="FilterMappingType">
+		<sequence>
+			<element name="filter-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="url-pattern" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="dispatcher" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента listener -->
+	<complexType name="ListenerType">
+		<sequence>
+			<element name="listener-class" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента servlet -->
+	<complexType name="ServletType">
+		<sequence>
+			<element name="servlet-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="servlet-class" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="init-param" type="tns:InitParamType" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента servlet-mapping -->
+	<complexType name="ServletMappingType">
+		<sequence>
+			<element name="servlet-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="url-pattern" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Тип элемента error-page -->
+	<complexType name="ErrorPageType">
+		<sequence>
+			<choice>
+				<element name="exception-type" type="string" />
+				<element name="error-code" type="int" />
+			</choice>
+			<element name="location" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+</schema>
